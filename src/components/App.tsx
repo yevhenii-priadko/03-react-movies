@@ -3,10 +3,10 @@ import SearchBar from './SearchBar/SearchBar';
 import MovieGrid from './MovieGrid/MovieGrid';
 import MovieModal from './MovieModal/MovieModal';
 import type { Movie } from '../types/movie';
-import { searchMovies } from '../services/movieService';
 import ErrorMessage from './ErrorMessage/ErrorMessage';
 import Loader from './Loader/Loader';
 import { toast, Toaster } from 'react-hot-toast';
+import searchMovies from '../services/movieService';
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -16,7 +16,7 @@ function App() {
 
   const handleSearch = async (query: string): Promise<void> => {
     if (!query.trim()) {
-      toast('Please enter your search query.');
+      toast.error('Please enter your search query.');
       return;
     }
 
@@ -26,7 +26,7 @@ function App() {
       const result = await searchMovies(query);
 
       if (result.length === 0) {
-        toast('No movies found for your request.');
+        toast.error('No movies found for your request.');
       }
 
       setMovies(result);

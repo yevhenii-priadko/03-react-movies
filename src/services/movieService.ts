@@ -8,7 +8,7 @@ interface MoviesResponse {
 const url = 'https://api.themoviedb.org/3/search/movie';
 const myKey = import.meta.env.VITE_API_KEY;
 
-export async function searchMovies(query: string): Promise<Movie[]> {
+async function searchMovies(query: string): Promise<Movie[]> {
   if (!query.trim()) return [];
 
   const response = await axios.get<MoviesResponse>(url, {
@@ -20,3 +20,5 @@ export async function searchMovies(query: string): Promise<Movie[]> {
   });
   return response.data.results;
 }
+
+export default searchMovies;
