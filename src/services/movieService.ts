@@ -6,13 +6,16 @@ interface MoviesResponse {
 }
 
 const url = 'https://api.themoviedb.org/3/search/movie';
+const myKey = import.meta.env.VITE_API_KEY;
 
 export async function searchMovies(query: string): Promise<Movie[]> {
+  if (!query.trim()) return [];
+
   const response = await axios.get<MoviesResponse>(url, {
     params: { query },
     headers: {
       accept: 'application/json',
-      Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
+      Authorization: `Bearer ${myKey}`,
     },
   });
   return response.data.results;
