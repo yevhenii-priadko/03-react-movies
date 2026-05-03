@@ -15,6 +15,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = async (query: string): Promise<void> => {
+    setHasError(false);
+
     if (!query.trim()) {
       toast.error('Please enter your search query.');
       return;
